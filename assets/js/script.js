@@ -1,6 +1,7 @@
-// 1. Show the current date at the top
-//      Use moment api and format today date
-//      Add it to the `currentDay` element
+// 1. The current date is shown using moment api, I have also added the time to the minute, so that the user has a clear view of exactly where they are in their day
+
+var currentDateTime = moment().format("dddd, MMMM Do h:mm A");
+$("#currentDay").text(currentDateTime);
 
 // 2. Colour code each block based on the current time
 //      Create variables to target each time block
