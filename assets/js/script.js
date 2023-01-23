@@ -23,6 +23,14 @@ timeblocks.each(function() {
     }
 });
 
+// added functionality to cross out the task if it is completed
+$('.task-checkbox').on('click', function() {
+    $(this).siblings('.scheduleInput').toggleClass('crossed-out');
+ });
+
+ // is there a way to add functionality to do something with the crossed out tasks and to move the non-crossed out tasks to another list to be reapplied the next day?
+ 
+
 // 3. Save input to local storage
 //      create variable (an array) called inputs that will store all of the input data
 var inputs = [];
@@ -46,11 +54,33 @@ $(".saveBtn").on("click", function(event) {
     var inputData = { time: hour, input: input, completed: $(this).prev().is(':checked') };
     var index = -1;
 
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].time == hour) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index === -1) {
+        inputs.push(inputData);
+    } else {
+        inputs[index] = inputData;
+    }
+    localStorage.setItem("inputs", JSON.stringify(inputs));
+});
+
 
 // 4. Load input from local storage when page load/refresh if there's any data in local storage
 //      var localStorageInput = get data from local storage
 //      check if localStorageInput exist, if it is
 
 //      if theres no data in local storage, do nothing
+var localStorageInput = localStorage.getItem("inputs");
+if (localStorageInput) {
+    var parsedLocalStorageInput = JSON.parse(localStorageInput);
+    parsedLocalStorageInput.forEach(function(input) {
+        $('.timeblock[data-hour="' + input.time + '"] textarea').val(input.input);
+    });
+}
 
 // Extra, add hover effect on the save button
