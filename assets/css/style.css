@@ -1,16 +1,22 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'cabin';
   font-size: 16px;
   line-height: 1;
 }
 
 textarea {
   background: transparent;
-  border: none;
-  resize: none;
   color: #000000;
-  border-left: 1px solid black;
   padding: 20px;
+  border: none;
+  outline: none;
+  overflow: auto;
+  resize: none;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .jumbotron {
@@ -38,27 +44,21 @@ textarea {
 }
 
 .timeblock .time {
-  width: 10%;
+  width: 15%;
   font-size: 1em;
   text-align: center;
   font-family: 'Orbitron';
 }
 
 .timeblock .scheduleInput {
-  width: 80%;
+  width: 70%;
   font-size: 0.8em;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .timeblock img {
-  width: 10%;
+  width: 15%;
   height: 30px;
 }
-
-/* .time-block {
-  text-align: center;
-  border-radius: 15px;
-} */
 
 .row {
   white-space: pre-wrap;
@@ -72,34 +72,48 @@ textarea {
   border-top: 1px dashed #000000;
 }
 
-.past {
-  background-color: #d3d3d3;
-  color: white;
+/* save button styling */
+
+button span {
+  position: relative;
+  z-index: 1;
 }
 
-.present {
-  background-color: #ff6961;
-  color: white;
+button {
+  align-items: center;
+  border: 2px solid #111;
+  border-radius: 45px;
+  color: #111;
+  display: flex;
+  font-family: 'Orbitron';
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
 }
 
-.future {
-  background-color: #77dd77;
-  color: white;
+button:hover {
+  cursor: crosshair;
+  background-color: #26ff00;outline: none;
 }
 
-.saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #ffffff;
-  color: white;
+button:active {
+  background-color: #26ff00;
+  outline: none;
+  cursor: crosshair;
+  padding: 8px 13px 6px;
 }
 
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
+button:focus {
+  outline: none;
 }
 
-.crossed-out {
-  text-decoration: line-through;
+@media (min-width: 768px) {
+  button {
+    padding: 0 40px;
+  }
 }
