@@ -4,9 +4,6 @@ var currentDateTime = moment().format("dddd, MMMM Do h:mm A");
 $("#currentDay").text(currentDateTime);
 
 // 2. Colour code each block based on the current time
-//      Create variables to target each time block
-//      In the html add the data-hour which represent which hour each element is
-//      Create variable for moment().format(H) (0 - 23) e.g. thisHour
 
 var hour = parseInt($(this).attr("data-hour"));
 var thisHour = parseInt(moment().format("H"));
@@ -22,37 +19,19 @@ timeblocks.each(function() {
         $(this).css("background-color", "#77dd77");
     }
 });
-
-// added functionality to cross out the task if it is completed
-$('.task-checkbox').on('click', function() {
-    $(this).siblings('.scheduleInput').toggleClass('crossed-out');
- });
-
- // is there a way to add functionality to do something with the crossed out tasks and to move the non-crossed out tasks to another list to be reapplied the next day?
  
-
 // 3. Save input to local storage
-//      create variable (an array) called inputs that will store all of the input data
+
 var inputs = [];
+// variable "inputs" created as an empty array
 
-//      Add event listener to all save buttons
-//          Add event.preventDefault inside the click event listener
-//          Push the input value to inputs array with the format of { time: xx, input: xxx }
-//              Get the input value
-//              Get the hour value
-//              Push to the inputs array if the hour entry not exist yet in the array
-//              Replace the existing entry if the hour entry exist in the array
-//          Save inputs variable to local storage
-//              Stringify the inputs array
-//          Show feedback message to the user (optional)
-//          The feedback need to be dissappeared automatically
 
-$(".saveBtn").on("click", function(event) {
-    event.preventDefault();
-    var input = $(this).siblings("textarea").val();
-    var hour = $(this).parent().attr("data-hour");
-    var inputData = { time: hour, input: input };
-    var index = -1;
+$(".saveBtn").on("click", function(event) { // click event listener added to class "saveBtn" 
+    event.preventDefault(); // When save button is clicked, event's default behavior is prevented
+    var input = $(this).siblings("textarea").val(); // input value is retrieved from textarea element that is sibling of save button using jQuery's .siblings() and .val() functions
+    var hour = $(this).parent().attr("data-hour"); // hour value retrieved from parent element of save button using jQuery's .parent() and .attr() functions
+    var inputData = { time: hour, input: input }; // Object created and stored in a variable
+    var timeofDay = -1;
 
     var confirmationMessage = $("#confirmation-message");
     confirmationMessage.text("schedule updated!");
@@ -61,28 +40,25 @@ $(".saveBtn").on("click", function(event) {
         confirmationMessage.fadeOut();
     }, 1500);
     
-
+    // for loop iterates over the inputs array
     for (var i = 0; i < inputs.length; i++) {
         if (inputs[i].time == hour) {
-            index = i;
+            timeofDay = i;
             break;
         }
     }
 
-    if (index === -1) {
+    if (timeofDay === -1) {
         inputs.push(inputData);
     } else {
-        inputs[index] = inputData;
+        inputs[timeofDay] = inputData;
     }
     localStorage.setItem("inputs", JSON.stringify(inputs));
 });
 
 
 // 4. Load input from local storage when page load/refresh if there's any data in local storage
-//      var localStorageInput = get data from local storage
-//      check if localStorageInput exist, if it is
 
-//      if theres no data in local storage, do nothing
 var localStorageInput = localStorage.getItem("inputs");
 if (localStorageInput) {
     var parsedLocalStorageInput = JSON.parse(localStorageInput);
