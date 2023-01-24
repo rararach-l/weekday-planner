@@ -31,6 +31,12 @@ p {
   white-space: pre-wrap;
 }
 
+#confirmation-message {
+  font-family: 'Orbitron';
+  padding-top: 10px;
+  font-size: 24px;
+}
+
 .timeblock {
   width: 100%;
   height: 100px;

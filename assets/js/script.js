@@ -51,8 +51,16 @@ $(".saveBtn").on("click", function(event) {
     event.preventDefault();
     var input = $(this).siblings("textarea").val();
     var hour = $(this).parent().attr("data-hour");
-    var inputData = { time: hour, input: input, completed: $(this).prev().is(':checked') };
+    var inputData = { time: hour, input: input };
     var index = -1;
+
+    var confirmationMessage = $("#confirmation-message");
+    confirmationMessage.text("schedule updated!");
+    confirmationMessage.show();
+    setTimeout(function() {
+        confirmationMessage.fadeOut();
+    }, 1500);
+    
 
     for (var i = 0; i < inputs.length; i++) {
         if (inputs[i].time == hour) {
@@ -82,5 +90,3 @@ if (localStorageInput) {
         $('.timeblock[data-hour="' + input.time + '"] textarea').val(input.input);
     });
 }
-
-// Extra, add hover effect on the save button
