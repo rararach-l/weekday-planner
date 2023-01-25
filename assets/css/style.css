@@ -4,6 +4,33 @@ body {
   justify-content: center;
 }
 
+.jumbotron { 
+  text-align: center;
+  background-color: white;
+  color: black;
+  border-radius: 0;
+  border-bottom: 10px solid black;
+  position: fixed; /* fixed position so that the confirmation message can always be seen on save */
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.container { /* offest from the top so that the confirmation message can always be seen on save */
+  padding-top: 375px; 
+}
+
+#description {
+  white-space: pre-wrap;
+  color: darkgray;
+}
+
+#confirmation-message {
+  font-family: 'Orbitron';
+  font-size: 24px;
+}
+
 textarea {
   background: transparent;
   color: #000000;
@@ -17,24 +44,6 @@ textarea {
 p {
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-  color: black;
-  border-radius: 0;
-  border-bottom: 10px solid black;
-}
-
-.description {
-  white-space: pre-wrap;
-}
-
-#confirmation-message {
-  font-family: 'Orbitron';
-  padding-top: 10px;
-  font-size: 24px;
 }
 
 .timeblock {
@@ -61,10 +70,10 @@ p {
   font-size: 0.8em;
 }
 
-.timeblock img {
+/* .timeblock img {
   width: 15%;
   height: 30px;
-}
+} */
 
 .row {
   white-space: pre-wrap;
